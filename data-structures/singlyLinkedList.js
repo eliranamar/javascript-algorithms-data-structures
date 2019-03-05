@@ -110,7 +110,7 @@ class SinglyLinkedList {
 
     /**
      * Gets a node based on its index
-     * @param {*} index 
+     * @param {Number} index 
      */
     get(index) {
         // Make sure index is in range of list
@@ -128,9 +128,9 @@ class SinglyLinkedList {
 
     /**
      * Sets the data of a node in a spcified index
-     * @param {*} index 
+     * @param {Number} index 
      * @param {*} data 
-     * @return {Boolean}
+     * @return {Boolean} - success indicator
      */
     set(index, data) {
         const node = this.get(index);
