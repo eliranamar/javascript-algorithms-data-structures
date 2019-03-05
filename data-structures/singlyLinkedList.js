@@ -135,12 +135,64 @@ class SinglyLinkedList {
     set(index, data) {
         const node = this.get(index);
         if (!node) {
-            return false
+            return false;
         }
         node.data = data;
         return true;
     }
-    
+
+    /**
+     * Adds a node to a specific index
+     * @param {Number} index 
+     * @param {*} value 
+     * @return {Boolean} - success indicator
+     */
+    insert(index, value) {
+        // verify correct index. index === list length is ok (will create a new node).
+        if (index < 0 || index > this.length) {
+            return false;
+        }
+        // If add to end of list, use existing method
+        if (index === this.length) {
+            this.push(value);
+            return true;
+        }
+        // If add to beginning of list, use existing method
+        if (index === 0) {
+            this.unshift(value);
+            return true;
+        }
+        // To insert in middle of list
+        const newNode = new Node(value);
+        const previousNode = this.get(index - 1); // node before the inserted new node
+        const temp = previousNode.next; // save next node pointer
+        previousNode.next = newNode;
+        newNode.next = temp;
+        this.length++;
+        return true;
+    }
+
+    /**
+     * Removes a node from a list at a spcecific index
+     * @param {Number} index 
+     * @returns {Node} = return removed node
+     */
+    remove(index) {
+        if (index < 0 || index >= this.length) {
+            return undefined; // indicate node not found
+        }
+        // use existing methods for removing from beginning or end of list
+        if (index === 0) { return this.shift(); }
+        if (index === this.length - 1) { return this.pop(); }
+
+        const prevNode = this.get(index - 1);
+        const removedNode = prevNode.next;
+        prevNode.next = removedNode.next;
+        this.length--;
+
+        return removedNode
+    }
+
 }
 
 const list = new SinglyLinkedList();
